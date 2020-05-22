@@ -33,7 +33,7 @@ class AddCategory : AppCompatActivity() {
         var myRef1=myRef.child("${unm.toString()}")
 
 
-        myRef1.addValueEventListener(object : ValueEventListener {
+        myRef1.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) { // This method is called once with the initial value and again
 // whenever data at this location is updated.
                 arlst.clear()

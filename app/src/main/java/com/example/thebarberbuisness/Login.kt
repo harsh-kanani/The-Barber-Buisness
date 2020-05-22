@@ -27,7 +27,7 @@ class Login : AppCompatActivity() {
             val database = FirebaseDatabase.getInstance()
             val myRef = database.getReference("Shop")
             var myRef1=myRef.child("${txtunm.text.toString()}")
-            myRef1.addValueEventListener(object : ValueEventListener {
+            myRef1.addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) { // This method is called once with the initial value and again
 // whenever data at this location is updated.
                     val value =dataSnapshot.child("password").value
@@ -37,7 +37,7 @@ class Login : AppCompatActivity() {
                         edt.putString("unm","${txtunm.text.toString()}")
                         edt.apply()
                         edt.commit()
-                        startActivity(Intent(this@Login,otherInfo::class.java))
+                        startActivity(Intent(this@Login,Dashboard::class.java))
                         finish()
                     }
 
