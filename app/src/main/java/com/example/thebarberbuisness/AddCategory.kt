@@ -30,7 +30,7 @@ class AddCategory : AppCompatActivity() {
         val myRef = database.getReference("Category")
         var myRef1=myRef.child("${unm.toString()}")
         btnadd.setOnClickListener {
-            var categoryData = CategoryData(txtcat.text.toString(),txtprice.text.toString(),txtmin.text.toString().toInt())
+            var categoryData = CategoryData(txtcat.text.toString(),txtprice.text.toString(),txtmin.text.toString().toInt(),"On")
 
             myRef1.child("${txtcat.text.toString()}").setValue(categoryData)
             Toast.makeText(this@AddCategory,"Successfully Add",Toast.LENGTH_LONG).show()

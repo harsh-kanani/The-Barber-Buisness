@@ -5,7 +5,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.category_custom.view.*
 
 
@@ -30,17 +33,28 @@ class CategoryMainClass(var ctx:Activity,var arlst:ArrayList<CategoryData>,var u
 
     override fun onBindViewHolder(holder: Viewholder, position: Int) {
         holder.nm.text = arlst[position].Name.toString()
+        val database = FirebaseDatabase.getInstance()
+        val myRef = database.getReference("Category")
+        var myRef1=myRef.child(unm.toString())
+
+
+        var status=arlst[position].Status
+        if(status == "On"){
+            holder.del.isChecked=true
+        }
+
+
         holder.edit.setOnClickListener {
             Toast.makeText(ctx,arlst[position].Name.toString(),Toast.LENGTH_LONG).show()
         }
-        holder.del.setOnClickListener {
-            // Write a message to the database
-            // Write a message to the database
 
-            val database = FirebaseDatabase.getInstance()
-            val myRef = database.getReference("Category")
+        holder.del.setOnCheckedChangeListener { buttonView, isChecked ->
+            var msg = if(isChecked) "On" else "Off"
 
-            myRef.child("$unm").child("${arlst[position].Name.toString()}").removeValue()
+            myRef1.child(arlst[position].Name).child("status").setValue(msg).addOnCompleteListener {
+                Toast.makeText(ctx,arlst[position].Name.toString() + " is $msg",Toast.LENGTH_LONG).show()
+            }
+
         }
     }
 

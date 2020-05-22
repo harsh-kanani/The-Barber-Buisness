@@ -5,13 +5,13 @@
     android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="227dp"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:foregroundGravity="center">
 
         <TextView
             android:id="@+id/lblcatnm"
-            android:layout_width="283dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:background="#F4F3F2"
@@ -28,10 +28,10 @@
         android:layout_weight="1"
         app:srcCompat="@android:drawable/ic_menu_edit" />
 
-    <ImageButton
+    <Switch
         android:id="@+id/btncatdel"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_weight="1"
-        app:srcCompat="@android:drawable/ic_menu_delete" />
+        android:text="Status" />
 </LinearLayout>
