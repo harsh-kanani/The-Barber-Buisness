@@ -66,10 +66,13 @@ class otherInfo : AppCompatActivity() {
 
         btnsave.setOnClickListener {
 
-                var shop=ShopData(uname,email,mobile,txtshopnm.text.toString(),txtct.text.toString(),password,sptp.selectedItem.toString(),txtoname.text.toString(),"Open",txttime.text.toString())
-                myRef.child(uname).setValue(shop)
-                Toast.makeText(this@otherInfo,"Successfully Save",Toast.LENGTH_LONG).show()
-                finish()
+                var shop=ShopData(uname,email,mobile,txtshopnm.text.toString(),txtct.text.toString(),password,sptp.selectedItem.toString(),txtoname.text.toString(),"Close"," ",txtaddress.text.toString())
+                myRef.child(uname).setValue(shop).addOnCompleteListener {
+                    Toast.makeText(this@otherInfo,"Successfully Save",Toast.LENGTH_LONG).show()
+                    startActivity(Intent(this@otherInfo,Login::class.java))
+                    finish()
+                }
+
         }
     }
 }

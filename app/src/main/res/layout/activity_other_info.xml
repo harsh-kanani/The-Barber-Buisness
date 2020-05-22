@@ -65,32 +65,35 @@
         android:id="@+id/btnsave"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="14dp"
         android:text="Save"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txttime" />
+        app:layout_constraintTop_toBottomOf="@+id/txtaddress" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="73dp"
+        android:layout_marginLeft="73dp"
         android:layout_marginTop="10dp"
+        android:layout_marginEnd="68dp"
+        android:layout_marginRight="68dp"
         android:text="Shop Type :"
-        app:layout_constraintEnd_toEndOf="@+id/txttime"
-        app:layout_constraintStart_toStartOf="@+id/txttime"
+        app:layout_constraintEnd_toEndOf="@+id/sptp"
+        app:layout_constraintStart_toStartOf="@+id/txtoname"
         app:layout_constraintTop_toBottomOf="@+id/txtoname" />
 
     <EditText
-        android:id="@+id/txttime"
+        android:id="@+id/txtaddress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="3dp"
-        android:layout_marginLeft="3dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="13dp"
         android:ems="10"
-        android:hint="Enter Shop Opening Time"
-        android:inputType="time"
-        app:layout_constraintStart_toStartOf="@+id/sptp"
+        android:hint="Enter Address"
+        android:inputType="textPostalAddress"
+        app:layout_constraintEnd_toEndOf="@+id/sptp"
         app:layout_constraintTop_toBottomOf="@+id/sptp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
