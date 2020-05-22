@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".otherInfo">
+
+    <TextView
+        android:id="@+id/lblinfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Other Info"
+        android:textColor="#E31111"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/txtshopnm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="13dp"
+        android:ems="10"
+        android:hint="Enter Shop Name"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblinfo" />
+
+    <EditText
+        android:id="@+id/txtct"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:ems="10"
+        android:hint="Enter City Name"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="@+id/txtshopnm"
+        app:layout_constraintTop_toBottomOf="@+id/txtshopnm" />
+
+    <Spinner
+        android:id="@+id/sptp"
+        android:layout_width="214dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="11dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+    <EditText
+        android:id="@+id/txtoname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="19dp"
+        android:ems="10"
+        android:hint="Enter Owner Name"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="@+id/txtct"
+        app:layout_constraintTop_toBottomOf="@+id/txtct" />
+
+    <Button
+        android:id="@+id/btnsave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="Save"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txttime" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Shop Type :"
+        app:layout_constraintEnd_toEndOf="@+id/txttime"
+        app:layout_constraintStart_toStartOf="@+id/txttime"
+        app:layout_constraintTop_toBottomOf="@+id/txtoname" />
+
+    <EditText
+        android:id="@+id/txttime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        android:layout_marginLeft="3dp"
+        android:layout_marginTop="15dp"
+        android:ems="10"
+        android:hint="Enter Shop Opening Time"
+        android:inputType="time"
+        app:layout_constraintStart_toStartOf="@+id/sptp"
+        app:layout_constraintTop_toBottomOf="@+id/sptp" />
+</androidx.constraintlayout.widget.ConstraintLayout>
