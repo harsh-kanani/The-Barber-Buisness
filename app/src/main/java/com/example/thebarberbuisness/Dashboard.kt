@@ -9,12 +9,14 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentActivity
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_dashboard.*
-import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
-import java.util.*
 
 
 class Dashboard : AppCompatActivity() {
@@ -28,6 +30,24 @@ class Dashboard : AppCompatActivity() {
         var sp = getSharedPreferences("MySp",Activity.MODE_PRIVATE)
         var unm = sp.getString("unm","null")
 
+        val database = FirebaseDatabase.getInstance()
+        val myRef = database.getReference("Shop")
+        var myRef1=myRef.child(unm.toString())
+
+        myRef1.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) { // This method is called once with the initial value and again
+// whenever data at this location is updated.
+                val value =dataSnapshot.child("status").value
+                if(value.toString().equals("Open")){
+                    swstatus.isChecked = true
+                }
+                //Log.d(FragmentActivity.TAG, "Value is: $value")
+            }
+
+            override fun onCancelled(error: DatabaseError) { // Failed to read value
+                //Log.w(FragmentActivity.TAG, "Failed to read value.", error.toException())
+            }
+        })
 
         swstatus.setOnCheckedChangeListener { buttonView, isChecked ->
             var msg = if(isChecked) "Open" else "Close"
@@ -59,15 +79,17 @@ class Dashboard : AppCompatActivity() {
         return when(item.itemId){
             R.id.menuaddcat->{
                 startActivity(Intent(this@Dashboard,AddCategory::class.java))
-                finish()
+
                 return true
             }
             R.id.menuviewcat->{
+                startActivity(Intent(this@Dashboard,ViewCategory::class.java))
+
                 return true
             }
             R.id.menulg->{
                 startActivity(Intent(this@Dashboard,Login::class.java))
-                finish()
+
                 return true
             }
             else->super.onOptionsItemSelected(item)

@@ -25,41 +25,10 @@ class AddCategory : AppCompatActivity() {
 
         var sp=getSharedPreferences("MySp",Activity.MODE_PRIVATE)
         var unm=sp.getString("unm","null")
-        Toast.makeText(this@AddCategory,unm.toString(),Toast.LENGTH_LONG).show()
 
-        var arlst:ArrayList<CategoryData> = arrayListOf<CategoryData>()
         val database = FirebaseDatabase.getInstance()
         val myRef = database.getReference("Category")
         var myRef1=myRef.child("${unm.toString()}")
-
-
-        myRef1.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) { // This method is called once with the initial value and again
-// whenever data at this location is updated.
-                arlst.clear()
-                for(s1 in dataSnapshot.children){
-                    val value =s1.getValue(CategoryData::class.java)
-                    if(value != null){
-                        arlst.add(value)
-                    }
-                }
-
-
-
-                var ad=CategoryMainClass(this@AddCategory,arlst,unm.toString())
-                lstvw.adapter=ad
-                lstvw.layoutManager= LinearLayoutManager(this@AddCategory,LinearLayoutManager.VERTICAL,false)
-            }
-
-
-
-
-            override fun onCancelled(error: DatabaseError) { // Failed to read value
-                //Log.w(FragmentActivity.TAG, "Failed to read value.", error.toException())
-            }
-
-        })
-
         btnadd.setOnClickListener {
             var categoryData = CategoryData(txtcat.text.toString(),txtprice.text.toString(),txtmin.text.toString().toInt())
 
