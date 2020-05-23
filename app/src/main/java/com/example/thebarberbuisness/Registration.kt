@@ -21,7 +21,7 @@ class Registration : AppCompatActivity() {
             finish()
         }
         btnreg.setOnClickListener {
-            var shopData=ShopData(txtusernm.text.toString(),txtmail.text.toString(),txtmno.text.toString()," "," ",txtpass.text.toString()," "," ","Open"," "," ")
+            var shopData=ShopData(txtusernm.text.toString(),txtmail.text.toString(),txtmno.text.toString()," "," ",txtpass.text.toString()," "," ","Open"," "," "," ")
             val database = FirebaseDatabase.getInstance()
             val myRef = database.getReference("Shop")
 

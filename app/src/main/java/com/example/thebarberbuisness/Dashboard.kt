@@ -1,6 +1,7 @@
 package com.example.thebarberbuisness
 
 import android.app.Activity
+import android.app.TimePickerDialog
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
@@ -15,8 +16,10 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_dashboard.*
+import java.text.SimpleDateFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import java.util.*
 
 
 class Dashboard : AppCompatActivity() {
@@ -52,7 +55,7 @@ class Dashboard : AppCompatActivity() {
         swstatus.setOnCheckedChangeListener { buttonView, isChecked ->
             var msg = if(isChecked) "Open" else "Close"
 
-            if(msg == "Open"){
+            /*if(msg == "Open"){
                 val current = LocalDateTime.now()
 
                 val formatter = DateTimeFormatter.ofPattern("HH:mm")
@@ -60,13 +63,15 @@ class Dashboard : AppCompatActivity() {
 
                 myRef.child(unm.toString()).child("openingTime").setValue(formatted.toString())
 
-            }
+            }*/
             myRef.child(unm.toString()).child("status").setValue(msg).addOnCompleteListener {
                 Toast.makeText(this@Dashboard,"Your Shop  is "+msg,Toast.LENGTH_LONG).show()
             }
 
 
         }
+
+
 
     }
 

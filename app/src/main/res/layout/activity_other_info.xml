@@ -11,89 +11,135 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:layout_marginBottom="4dp"
         android:text="Other Info"
         android:textColor="#E31111"
         android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/txtshopnm"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="13dp"
-        android:ems="10"
-        android:hint="Enter Shop Name"
-        android:inputType="textPersonName"
+    <ScrollView
+        android:id="@+id/scrollView3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lblinfo" />
+        app:layout_constraintTop_toBottomOf="@+id/lblinfo">
 
-    <EditText
-        android:id="@+id/txtct"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:ems="10"
-        android:hint="Enter City Name"
-        android:inputType="textPersonName"
-        app:layout_constraintStart_toStartOf="@+id/txtshopnm"
-        app:layout_constraintTop_toBottomOf="@+id/txtshopnm" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <Spinner
-        android:id="@+id/sptp"
-        android:layout_width="214dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="11dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+            <Button
+                android:id="@+id/btnsave"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Save"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lblcltime" />
 
-    <EditText
-        android:id="@+id/txtoname"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="19dp"
-        android:ems="10"
-        android:hint="Enter Owner Name"
-        android:inputType="textPersonName"
-        app:layout_constraintStart_toStartOf="@+id/txtct"
-        app:layout_constraintTop_toBottomOf="@+id/txtct" />
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="9dp"
+                android:text="Shop Type :"
+                app:layout_constraintBottom_toTopOf="@+id/sptp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtoname" />
 
-    <Button
-        android:id="@+id/btnsave"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="14dp"
-        android:text="Save"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtaddress" />
+            <EditText
+                android:id="@+id/txtaddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:ems="10"
+                android:hint="Enter Address"
+                android:inputType="textPostalAddress"
+                app:layout_constraintBottom_toTopOf="@+id/lbloptime"
+                app:layout_constraintStart_toStartOf="@+id/lbloptime"
+                app:layout_constraintTop_toBottomOf="@+id/sptp" />
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="73dp"
-        android:layout_marginLeft="73dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="68dp"
-        android:layout_marginRight="68dp"
-        android:text="Shop Type :"
-        app:layout_constraintEnd_toEndOf="@+id/sptp"
-        app:layout_constraintStart_toStartOf="@+id/txtoname"
-        app:layout_constraintTop_toBottomOf="@+id/txtoname" />
+            <EditText
+                android:id="@+id/txtct"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="2dp"
+                android:layout_marginRight="2dp"
+                android:layout_marginBottom="14dp"
+                android:ems="10"
+                android:hint="Enter City Name"
+                android:inputType="textPersonName"
+                app:layout_constraintBottom_toTopOf="@+id/txtoname"
+                app:layout_constraintEnd_toEndOf="@+id/txtshopnm"
+                app:layout_constraintTop_toBottomOf="@+id/txtshopnm" />
 
-    <EditText
-        android:id="@+id/txtaddress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="13dp"
-        android:ems="10"
-        android:hint="Enter Address"
-        android:inputType="textPostalAddress"
-        app:layout_constraintEnd_toEndOf="@+id/sptp"
-        app:layout_constraintTop_toBottomOf="@+id/sptp" />
+            <Spinner
+                android:id="@+id/sptp"
+                android:layout_width="214dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                app:layout_constraintBottom_toTopOf="@+id/txtaddress"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+            <EditText
+                android:id="@+id/txtshopnm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="13dp"
+                android:ems="10"
+                android:hint="Enter Shop Name"
+                android:inputType="textPersonName"
+                app:layout_constraintBottom_toTopOf="@+id/txtct"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/txtoname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:ems="10"
+                android:hint="Enter Owner Name"
+                android:inputType="textPersonName"
+                app:layout_constraintBottom_toTopOf="@+id/textView4"
+                app:layout_constraintStart_toStartOf="@+id/txtct"
+                app:layout_constraintTop_toBottomOf="@+id/txtct" />
+
+            <TextView
+                android:id="@+id/lbloptime"
+                android:layout_width="216dp"
+                android:layout_height="40dp"
+                android:layout_marginBottom="12dp"
+                android:text="Select Shop Opening Time"
+                app:layout_constraintBottom_toTopOf="@+id/lblcltime"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtaddress" />
+
+            <TextView
+                android:id="@+id/lblcltime"
+                android:layout_width="216dp"
+                android:layout_height="40dp"
+                android:layout_marginBottom="17dp"
+                android:text="Select Shop Closing Time"
+                app:layout_constraintBottom_toTopOf="@+id/btnsave"
+                app:layout_constraintEnd_toEndOf="@+id/lbloptime"
+                app:layout_constraintStart_toStartOf="@+id/lbloptime"
+                app:layout_constraintTop_toBottomOf="@+id/lbloptime" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

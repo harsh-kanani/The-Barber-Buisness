@@ -1,6 +1,7 @@
 package com.example.thebarberbuisness
 
 import android.app.Activity
+import android.app.TimePickerDialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -14,6 +15,8 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_other_info.*
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class otherInfo : AppCompatActivity() {
@@ -21,6 +24,8 @@ class otherInfo : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_other_info)
+
+
 
         var arr:Array<String> = arrayOf("Gents","Ladies","Unisex")
         var ad:ArrayAdapter<String> = ArrayAdapter(this@otherInfo,android.R.layout.simple_spinner_dropdown_item,arr)
@@ -66,12 +71,38 @@ class otherInfo : AppCompatActivity() {
 
         btnsave.setOnClickListener {
 
-                var shop=ShopData(uname,email,mobile,txtshopnm.text.toString(),txtct.text.toString(),password,sptp.selectedItem.toString(),txtoname.text.toString(),"Close"," ",txtaddress.text.toString())
+                var shop=ShopData(uname,email,mobile,txtshopnm.text.toString(),txtct.text.toString(),password,sptp.selectedItem.toString(),txtoname.text.toString(),"Close",lbloptime.text.toString(),txtaddress.text.toString(),lblcltime.text.toString())
                 myRef.child(uname).setValue(shop).addOnCompleteListener {
                     Toast.makeText(this@otherInfo,"Successfully Save",Toast.LENGTH_LONG).show()
                     startActivity(Intent(this@otherInfo,Login::class.java))
                     finish()
                 }
+
+        }
+        lbloptime.setOnClickListener {
+            val cal = Calendar.getInstance()
+            val timeSetListener = TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
+                cal.set(Calendar.HOUR_OF_DAY, hour)
+                cal.set(Calendar.MINUTE, minute)
+
+
+                lbloptime.text = SimpleDateFormat("HH:mm").format(cal.time)
+
+            }
+            TimePickerDialog(this, timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true).show()
+
+        }
+        lblcltime.setOnClickListener {
+            val cal = Calendar.getInstance()
+            val timeSetListener = TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
+                cal.set(Calendar.HOUR_OF_DAY, hour)
+                cal.set(Calendar.MINUTE, minute)
+
+
+                lblcltime.text = SimpleDateFormat("HH:mm").format(cal.time)
+
+            }
+            TimePickerDialog(this, timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true).show()
 
         }
     }
