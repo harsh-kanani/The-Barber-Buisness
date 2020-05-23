@@ -76,20 +76,6 @@ class Dashboard : AppCompatActivity() {
 
         }
 
-        btnchk.setOnClickListener {
-            var dialog = Dialog(this@Dashboard)
-            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-            dialog.setCancelable(false)
-            dialog.setContentView(R.layout.category_edit)
-            var body = dialog.findViewById<TextView>(R.id.lblnm)
-            body.setText("hello")
-            var editbutton = dialog.findViewById<Button>(R.id.btnedt)
-            editbutton.setOnClickListener {
-                dialog.dismiss()
-            }
-            dialog.show()
-
-        }
 
     }
 

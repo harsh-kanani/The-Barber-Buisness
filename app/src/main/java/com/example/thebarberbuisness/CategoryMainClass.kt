@@ -1,8 +1,13 @@
 package com.example.thebarberbuisness
 
 import android.app.Activity
+import android.app.Dialog
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
+import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.FirebaseDatabase
@@ -13,7 +18,7 @@ class CategoryMainClass(var ctx:Activity,var arlst:ArrayList<CategoryData>,var u
 {
 
     inner class Viewholder(v:View):RecyclerView.ViewHolder(v){
-        var nm = v.txtcatprc
+        var nm = v.txtcatprice
         var edit = v.btncatedit
         var del = v.btncatdel
     }
@@ -40,9 +45,54 @@ class CategoryMainClass(var ctx:Activity,var arlst:ArrayList<CategoryData>,var u
             holder.del.isChecked=true
         }
 
+        holder.nm.setOnClickListener {
+            var dialog = Dialog(ctx)
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+            dialog.setCancelable(false)
+            dialog.setContentView(R.layout.view_category_dialog)
+            var cnm = dialog.findViewById<TextView>(R.id.lblcategoryname)
+            cnm.setText("Name : "+arlst[position].Name.toString())
+            var prc=dialog.findViewById<TextView>(R.id.lblcategoryprice)
+            prc.setText("Price : "+ arlst[position].Price.toString())
+            var tm= dialog.findViewById<TextView>(R.id.lblcategorytime)
+            tm.setText("Minutes : "+arlst[position].Minute.toString())
+            var can = dialog.findViewById<Button>(R.id.btnok)
+            can.setOnClickListener {
+                dialog.dismiss()
+            }
+            dialog.show()
+        }
+
 
         holder.edit.setOnClickListener {
-            Toast.makeText(ctx,arlst[position].Name.toString(),Toast.LENGTH_LONG).show()
+            var dialog = Dialog(ctx)
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+            dialog.setCancelable(false)
+            dialog.setContentView(R.layout.category_edit)
+            var cnm = dialog.findViewById<TextView>(R.id.lblnm)
+            cnm.setText(arlst[position].Name.toString())
+            var prc=dialog.findViewById<EditText>(R.id.txtcatprice)
+            prc.setText(arlst[position].Price.toString())
+            var tm= dialog.findViewById<EditText>(R.id.txtcatminute)
+            tm.setText(arlst[position].Minute.toString())
+            var can = dialog.findViewById<Button>(R.id.btncancel)
+            can.setOnClickListener {
+                dialog.dismiss()
+            }
+
+            var editbutton = dialog.findViewById<Button>(R.id.btnedt)
+            editbutton.setOnClickListener {
+                val database = FirebaseDatabase.getInstance()
+                val myRef = database.getReference("Category")
+                var category = CategoryData(cnm.text.toString(),prc.text.toString(),tm.text.toString().toInt(),arlst[position].Status)
+                myRef.child(unm).child(cnm.text.toString()).setValue(category).addOnCompleteListener{
+                    Toast.makeText(ctx,"Data SuccessFully Change",Toast.LENGTH_LONG).show()
+                }
+
+                dialog.dismiss()
+            }
+            dialog.show()
+
         }
 
         holder.del.setOnCheckedChangeListener { buttonView, isChecked ->
