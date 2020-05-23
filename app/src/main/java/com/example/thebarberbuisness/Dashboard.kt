@@ -9,6 +9,9 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.Window
+import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -77,7 +80,15 @@ class Dashboard : AppCompatActivity() {
             var dialog = Dialog(this@Dashboard)
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
             dialog.setCancelable(false)
-            //dialog.setContentView()
+            dialog.setContentView(R.layout.category_edit)
+            var body = dialog.findViewById<TextView>(R.id.lblnm)
+            body.setText("hello")
+            var editbutton = dialog.findViewById<Button>(R.id.btnedt)
+            editbutton.setOnClickListener {
+                dialog.dismiss()
+            }
+            dialog.show()
+
         }
 
     }
