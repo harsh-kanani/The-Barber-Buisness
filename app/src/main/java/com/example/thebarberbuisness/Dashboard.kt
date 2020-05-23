@@ -1,12 +1,14 @@
 package com.example.thebarberbuisness
 
 import android.app.Activity
+import android.app.Dialog
 import android.app.TimePickerDialog
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.Window
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -71,7 +73,12 @@ class Dashboard : AppCompatActivity() {
 
         }
 
-
+        btnchk.setOnClickListener {
+            var dialog = Dialog(this@Dashboard)
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+            dialog.setCancelable(false)
+            //dialog.setContentView()
+        }
 
     }
 

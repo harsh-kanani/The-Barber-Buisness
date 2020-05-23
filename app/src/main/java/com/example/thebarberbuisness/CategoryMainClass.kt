@@ -5,10 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.category_custom.view.*
 
 
@@ -16,7 +13,7 @@ class CategoryMainClass(var ctx:Activity,var arlst:ArrayList<CategoryData>,var u
 {
 
     inner class Viewholder(v:View):RecyclerView.ViewHolder(v){
-        var nm = v.lblcatnm
+        var nm = v.txtcatprc
         var edit = v.btncatedit
         var del = v.btncatdel
     }
