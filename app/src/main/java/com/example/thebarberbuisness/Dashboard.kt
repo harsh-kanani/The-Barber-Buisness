@@ -1,11 +1,13 @@
 package com.example.thebarberbuisness
 
 import android.app.Activity
+import android.app.DatePickerDialog
 import android.app.Dialog
 import android.app.TimePickerDialog
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.Window
@@ -16,15 +18,17 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentActivity
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_dashboard.*
+import kotlinx.android.synthetic.main.activity_view_category.*
 import java.text.SimpleDateFormat
 import java.time.LocalDateTime
+import java.time.Month
 import java.time.format.DateTimeFormatter
 import java.util.*
+import javax.xml.datatype.DatatypeConstants
+import javax.xml.datatype.DatatypeConstants.MONTHS
 
 
 class Dashboard : AppCompatActivity() {
@@ -76,6 +80,59 @@ class Dashboard : AppCompatActivity() {
 
         }
 
+        val database1 = FirebaseDatabase.getInstance()
+        val myref = database1.getReference("appinment")
+
+        var myref1=myref.child(unm.toString())
+        val current = LocalDateTime.now()
+
+        val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
+        val formatted = current.format(formatter)
+        fun f(){
+            var myref2=myref1.child(formatted.toString())
+
+            myref2.addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) { // This method is called once with the initial value and again
+// whenever data at this location is updated.
+                    for(s1 in dataSnapshot.children){
+                        var value = s1.getValue(AppointmentData::class.java)
+                        if(value != null){
+                            Log.d("hello",value.toString())
+                        }
+
+                    }
+                }
+
+
+
+
+                override fun onCancelled(error: DatabaseError) { // Failed to read value
+                    //Log.w(FragmentActivity.TAG, "Failed to read value.", error.toException())
+                }
+
+            })
+
+        }
+        f()
+        swtoday.setOnCheckedChangeListener { buttonView, isChecked ->
+
+
+            var msg= if(isChecked) "not" else "${formatted.toString()}"
+
+
+
+            // Write a message to the database
+
+            if(msg != "not"){
+                f()
+            }
+
+
+
+        }
+
+
+
 
     }
 
@@ -106,3 +163,10 @@ class Dashboard : AppCompatActivity() {
 
     }
 }
+
+
+
+
+
+
+
