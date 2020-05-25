@@ -23,12 +23,14 @@ import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_dashboard.*
 import kotlinx.android.synthetic.main.activity_view_category.*
 import java.text.SimpleDateFormat
+import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.Month
 import java.time.format.DateTimeFormatter
 import java.util.*
 import javax.xml.datatype.DatatypeConstants
 import javax.xml.datatype.DatatypeConstants.MONTHS
+import kotlin.collections.ArrayList
 
 
 class Dashboard : AppCompatActivity() {
@@ -87,20 +89,32 @@ class Dashboard : AppCompatActivity() {
         val current = LocalDateTime.now()
 
         val formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy")
+
         val formatted = current.format(formatter)
-        fun f(){
-            var myref2=myref1.child(formatted.toString())
+        var tommorw = current.plusDays(1)
+        var form = tommorw.format(formatter)
+
+
+
+        var arlst:ArrayList<AppointmentData> = arrayListOf<AppointmentData>()
+        fun f(dt:String){
+            var myref2=myref1.child(dt)
 
             myref2.addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) { // This method is called once with the initial value and again
 // whenever data at this location is updated.
+                    arlst.clear()
                     for(s1 in dataSnapshot.children){
                         var value = s1.getValue(AppointmentData::class.java)
                         if(value != null){
-                            Log.d("hello",value.toString())
+                            arlst.add(value)
+                            //Log.d("hello",value.toString())
                         }
 
                     }
+                    var ad = AppointmentMainClass(this@Dashboard,arlst,unm.toString())
+                    rcv.adapter=ad
+                    rcv.layoutManager = LinearLayoutManager(this@Dashboard,LinearLayoutManager.VERTICAL,false)
                 }
 
 
@@ -113,7 +127,7 @@ class Dashboard : AppCompatActivity() {
             })
 
         }
-        f()
+        f(formatted.toString())
         swtoday.setOnCheckedChangeListener { buttonView, isChecked ->
 
 
@@ -124,7 +138,10 @@ class Dashboard : AppCompatActivity() {
             // Write a message to the database
 
             if(msg != "not"){
-                f()
+                f(formatted.toString())
+            }
+            else{
+                f(form.toString())
             }
 
 
