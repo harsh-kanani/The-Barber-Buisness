@@ -38,7 +38,6 @@ class otherInfo : AppCompatActivity() {
         val database = FirebaseDatabase.getInstance()
         val myRef = database.getReference("Shop")
         var myRef1 = myRef.child("${unm.toString()}")
-        var imgurl=""
         var email =""
         var mobile =""
         var password=""
@@ -51,7 +50,7 @@ class otherInfo : AppCompatActivity() {
                 email = dataSnapshot.child("email").value.toString()
                 mobile = dataSnapshot.child("mobile").value.toString()
                 password = dataSnapshot.child("password").value.toString()
-                imgurl = dataSnapshot.child("imgurl").value.toString()
+
 
                 var value=dataSnapshot.child("oname").value.toString()
                 Log.d("long",value)
@@ -74,6 +73,7 @@ class otherInfo : AppCompatActivity() {
 
 
         btnsave.setOnClickListener {
+            var imgurl=intent.getStringExtra("imgurl")
 
                 var shop=ShopData(uname,email,mobile,txtshopnm.text.toString(),txtct.text.toString(),password,sptp.selectedItem.toString(),txtoname.text.toString(),"Close",lbloptime.text.toString(),txtaddress.text.toString(),lblcltime.text.toString(),imgurl)
                 myRef.child(uname).setValue(shop).addOnCompleteListener {

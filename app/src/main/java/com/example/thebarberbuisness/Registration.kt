@@ -32,6 +32,7 @@ class Registration : AppCompatActivity() {
     private var storageReference: StorageReference? = null
     private var d:ByteArray?=null
     private var username:String?=null
+    private var flg:String="false"
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -77,21 +78,24 @@ class Registration : AppCompatActivity() {
 
         btnreg.setOnClickListener {
             uploadImage()
-            var shopData=ShopData(txtusernm.text.toString(),txtmail.text.toString(),txtmno.text.toString()," "," ",txtpass.text.toString()," "," ","Open"," "," "," ")
+            var shopData=ShopData(txtusernm.text.toString(),txtmail.text.toString(),txtmno.text.toString()," "," ",txtpass.text.toString()," "," ","Open"," "," ","")
             val database = FirebaseDatabase.getInstance()
             val myRef = database.getReference("Shop")
             username=txtusernm.text.toString()
-            myRef.child("${txtusernm.text.toString()}").setValue(shopData).addOnCompleteListener {
-                Toast.makeText(this@Registration,"Successfully Register",Toast.LENGTH_LONG).show()
-                var sp=getSharedPreferences("MySp", Activity.MODE_PRIVATE)
-                var edt = sp.edit()
-                edt.putString("unm","${txtusernm.text.toString()}")
-                edt.apply()
-                edt.commit()
-                startActivity(Intent(this@Registration,otherInfo::class.java))
-                finish()
-            }
+                myRef.child("${txtusernm.text.toString()}").setValue(shopData)
+                    .addOnCompleteListener {
+                        Toast.makeText(
+                            this@Registration,
+                            "Successfully Register",
+                            Toast.LENGTH_LONG
+                        ).show()
+                        var sp = getSharedPreferences("MySp", Activity.MODE_PRIVATE)
+                        var edt = sp.edit()
+                        edt.putString("unm", "${txtusernm.text.toString()}")
+                        edt.apply()
+                        edt.commit()
 
+                    }
         }
     }
 
@@ -112,7 +116,12 @@ class Registration : AppCompatActivity() {
 
                         val database = FirebaseDatabase.getInstance()
                         val myRef = database.getReference("Shop")
-                        myRef.child(username.toString()).child("imgurl").setValue(imgdata.toString())
+                        myRef.child(username.toString()).child("imgurl").setValue(imgdata.toString()).addOnCompleteListener {
+                            var int1= Intent(this@Registration, otherInfo::class.java)
+                            int1.putExtra("imgurl",imgdata.toString())
+                            startActivity(int1)
+                            finish()
+                        }
                         progressBar.visibility=View.GONE
                         Toast.makeText(this, "done", Toast.LENGTH_SHORT).show()
                     } else {
