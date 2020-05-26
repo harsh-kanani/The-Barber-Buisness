@@ -19,6 +19,13 @@ class Login : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
+        var sp = getSharedPreferences("MySp",Activity.MODE_PRIVATE)
+        var unm = sp.getString("unm",null)
+        if(unm != null){
+            startActivity(Intent(this@Login,Dashboard::class.java))
+            finish()
+        }
+
         lblreg.setOnClickListener {
             startActivity(Intent(this@Login,Registration::class.java))
 
