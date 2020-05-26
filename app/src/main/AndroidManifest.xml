@@ -12,7 +12,8 @@
         <activity android:name=".ViewCategory"></activity>
         <activity android:name=".AddCategory" />
         <activity android:name=".Dashboard" />
-        <activity android:name=".otherInfo" />
+        <activity android:name=".otherInfo"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity android:name=".Registration"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity android:name=".Login"
