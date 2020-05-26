@@ -171,6 +171,11 @@ class Dashboard : AppCompatActivity() {
                 return true
             }
             R.id.menulg->{
+                var sp = getSharedPreferences("MySp",Activity.MODE_PRIVATE)
+                var edt =sp.edit()
+                edt.putString("unm",null)
+                edt.apply()
+                edt.commit()
                 startActivity(Intent(this@Dashboard,Login::class.java))
 
                 return true

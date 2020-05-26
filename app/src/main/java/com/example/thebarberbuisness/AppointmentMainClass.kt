@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.view.Window
 import android.widget.Button
 import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -42,9 +43,46 @@ class AppointmentMainClass(var ctx:Activity,var arlst:ArrayList<AppointmentData>
         val myRef = database.getReference("userdata")
         val myRef2 = database.getReference("appinment")
 
+        holder.nm.setOnClickListener {
+            var dialog = Dialog(ctx)
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+            dialog.setCancelable(false)
+            dialog.setContentView(R.layout.category_detail_dialog)
+            var cnm = dialog.findViewById<RecyclerView>(R.id.rcvd)
 
-        holder.com.setOnClickListener {
-            //var arl:ArrayList<CategoryData> = arrayListOf<CategoryData>()
+            var arl:ArrayList<CategoryData> = arrayListOf<CategoryData>()
+            var myref1 = myRef2.child(unm). child(arlst[position].date).child(arlst[position].time).child("bookfor")
+            myref1.addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    // This method is called once with the initial value and again
+                    // whenever data at this location is updated.
+                    arl.clear()
+                    for (s in dataSnapshot.children){
+
+                        var value = s.getValue(CategoryData::class.java)
+                        if (value!= null){
+                            arl.add(value)
+
+                        }
+                    }
+                    var ad = CategoryDetailMainClass(ctx,arl)
+                    cnm.adapter =ad
+                    cnm.layoutManager = LinearLayoutManager(ctx,LinearLayoutManager.VERTICAL,false)
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    // Failed to read value
+                    //Log.w(TAG, "Failed to read value.", error.toException())
+                }
+            })
+            var btn = dialog.findViewById<Button>(R.id.btndialogok)
+            btn.setOnClickListener {
+                dialog.dismiss()
+            }
+            dialog.show()
+        }
+
+        fun history(status:String){
             var i=0
             var myref1 = myRef2.child(unm). child(arlst[position].date).child(arlst[position].time).child("bookfor")
             myref1.addListenerForSingleValueEvent(object : ValueEventListener {
@@ -56,7 +94,7 @@ class AppointmentMainClass(var ctx:Activity,var arlst:ArrayList<AppointmentData>
                         i+=1
                         var value = s.getValue(CategoryData::class.java)
                         if (value!= null){
-                            myRef.child(arlst[position].custunm).child("History").child(arlst[position].date).child(arlst[position].time).child("bookfor").child(i.toString()).setValue(value)
+                            myRef.child(arlst[position].custunm).child("History").child(unm).child(arlst[position].date).child(arlst[position].time).child("bookfor").child(i.toString()).setValue(value)
                             //arl.add(value)
                         }
                     }
@@ -68,38 +106,18 @@ class AppointmentMainClass(var ctx:Activity,var arlst:ArrayList<AppointmentData>
                     //Log.w(TAG, "Failed to read value.", error.toException())
                 }
             })
-            var history =HistoryData(arlst[position].custunm,arlst[position].date,arlst[position].time,"Completed")
-            myRef.child(arlst[position].custunm).child("History").child(arlst[position].date).child(arlst[position].time).setValue(history)
+            var history =HistoryData(arlst[position].custunm,arlst[position].date,arlst[position].time,status)
+            myRef.child(arlst[position].custunm).child("History").child(unm).child(arlst[position].date).child(arlst[position].time).setValue(history)
             myRef2.child(unm).child(arlst[position].date).child(arlst[position].time).removeValue()
         }
-        holder.can.setOnClickListener {
-            var i=0
-            var myref1 = myRef2.child(unm). child(arlst[position].date).child(arlst[position].time).child("bookfor")
-            myref1.addListenerForSingleValueEvent(object : ValueEventListener {
-                override fun onDataChange(dataSnapshot: DataSnapshot) {
-                    // This method is called once with the initial value and again
-                    // whenever data at this location is updated.
-                    //arl.clear()
-                    for (s in dataSnapshot.children){
-                        i+=1
-                        var value = s.getValue(CategoryData::class.java)
-                        if (value!= null){
-                            myRef.child(arlst[position].custunm).child("History").child(arlst[position].date).child(arlst[position].time).child("bookfor").child(i.toString()).setValue(value)
-                            //arl.add(value)
-                        }
-                    }
-
-                }
-
-                override fun onCancelled(error: DatabaseError) {
-                    // Failed to read value
-                    //Log.w(TAG, "Failed to read value.", error.toException())
-                }
-            })
-                var history =HistoryData(arlst[position].custunm,arlst[position].date,arlst[position].time,"Cancelled")
-                myRef.child(arlst[position].custunm).child("History").child(arlst[position].date).child(arlst[position].time).setValue(history)
-                myRef2.child(unm).child(arlst[position].date).child(arlst[position].time).removeValue()
+        holder.com.setOnClickListener {
+            //var arl:ArrayList<CategoryData> = arrayListOf<CategoryData>()
+            history("Completed")
         }
+        holder.can.setOnClickListener {
+            history("Cancelled")
+        }
+
     }
 
 }
