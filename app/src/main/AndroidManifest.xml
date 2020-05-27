@@ -10,7 +10,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".ViewCategory"></activity>
-        <activity android:name=".AddCategory" />
+        <activity android:name=".AddCategory"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity android:name=".Dashboard" />
         <activity android:name=".otherInfo"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>

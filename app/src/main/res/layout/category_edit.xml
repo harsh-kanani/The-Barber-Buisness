@@ -3,13 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    app:layout_constraintCircleRadius="60dp"
+    android:background="@color/colorPrimaryDark"
     android:layout_height="wrap_content">
 
-    <com.google.android.material.card.MaterialCardView
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
+    <androidx.cardview.widget.CardView
+        android:layout_width="392dp"
+        android:layout_height="302dp"
+        app:cardCornerRadius="30dp"
+        app:cardBackgroundColor="@color/colorPrimaryDark"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:background="@color/colorPrimaryDark"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -18,36 +21,37 @@
             android:id="@+id/txtcatprice"
             android:layout_width="wrap_content"
             android:layout_height="35dp"
-            android:layout_marginLeft="120dp"
+            android:paddingLeft="10dp"
+            android:layout_marginLeft="150dp"
             android:layout_marginTop="120dp"
             android:background="@drawable/edittext_background"
             android:ems="10"
-            android:textColor="#f3f3f3"
-            android:textColorHint="#f3f3f3"
             android:hint="Enter Price"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:textColor="#f3f3f3"
+            android:textColorHint="#f3f3f3" />
 
         <TextView
             android:id="@+id/textView8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
             android:layout_marginLeft="130dp"
+            android:layout_marginTop="15dp"
             android:text="Edit Category"
             android:textColor="@color/colorPrimary"
-            android:textSize="24sp"/>
+            android:textSize="24sp" />
 
         <TextView
             android:id="@+id/lblnm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="160dp"
+            android:layout_marginTop="70dp"
             android:layout_marginBottom="12dp"
             android:text="TextView"
-            android:layout_marginTop="70dp"
-            android:layout_marginLeft="160dp"
             android:textColor="@color/colorPrimary"
             android:textSize="18sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/btnedt"
@@ -91,14 +95,15 @@
             android:id="@+id/txtcatminute"
             android:layout_width="wrap_content"
             android:layout_height="36dp"
-            android:layout_marginLeft="120dp"
+            android:layout_marginLeft="150dp"
+            android:paddingLeft="10dp"
             android:layout_marginTop="170dp"
             android:background="@drawable/edittext_background"
             android:ems="10"
-            android:textColor="#f3f3f3"
-            android:textColorHint="#f3f3f3"
             android:hint="Enter Minutes For Category"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:textColor="#f3f3f3"
+            android:textColorHint="#f3f3f3" />
 
-    </com.google.android.material.card.MaterialCardView>
+    </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
