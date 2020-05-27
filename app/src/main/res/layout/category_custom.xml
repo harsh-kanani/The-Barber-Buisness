@@ -5,33 +5,36 @@
     android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
         android:foregroundGravity="center">
 
         <TextView
             android:id="@+id/txtcatprice"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:background="#F4F3F2"
+            android:layout_width="193dp"
+            android:layout_height="67dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
             android:text="TextView"
-            android:textColor="#3F51B5"
-            android:textSize="24sp"
+            android:textColor="@color/colorPrimary"
+            android:textSize="18dp"
             android:textStyle="bold" />
+
+        <ImageButton
+            android:id="@+id/btncatedit"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="220dp"
+            android:src="@mipmap/editlogo" />
+
+        <Switch
+            android:id="@+id/btncatdel"
+            android:layout_width="95dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="295dp"
+            android:layout_weight="1"
+            android:text="Status" />
+
     </androidx.cardview.widget.CardView>
 
-    <ImageButton
-        android:id="@+id/btncatedit"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        app:srcCompat="@android:drawable/ic_menu_edit" />
-
-    <Switch
-        android:id="@+id/btncatdel"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:text="Status" />
 </LinearLayout>

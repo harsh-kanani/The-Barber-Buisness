@@ -8,56 +8,80 @@
 
     <Switch
         android:id="@+id/swstatus"
+        android:layout_width="241dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="16dp"
+        android:checked="true"
+        android:showText="true"
+        android:switchMinWidth="60dp"
+        android:switchTextAppearance="@style/TextAppearance.AppCompat.Widget.Switch"
+        android:text="Shop Status"
+        android:textColor="@color/colorPrimary"
+        android:textOff="Close"
+        android:textOn="Open"
+        android:textSize="20dp"
+        android:thumb="@color/colorPrimary"
+        android:thumbTextPadding="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="14dp"
-        android:layout_marginLeft="14dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="19dp"
-        android:text="Shop  Status"
-        app:layout_constraintBottom_toTopOf="@+id/lbltomorrow"
-        app:layout_constraintStart_toStartOf="@+id/swtoday"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginStart="117dp"
+        android:layout_marginLeft="117dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="117dp"
+        android:layout_marginRight="117dp"
+        android:drawableLeft="@drawable/ic_shopping_cart_black_24dp"
+        android:drawablePadding="10dp"
+        android:text="Your Order"
+        android:textSize="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/swstatus" />
 
     <Switch
         android:id="@+id/swtoday"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="133dp"
-        android:layout_marginLeft="133dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="1dp"
-        android:text="Today"
-        app:layout_constraintBottom_toTopOf="@+id/rcv"
-        app:layout_constraintEnd_toStartOf="@+id/lbltomorrow"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:layout_width="211dp"
+        android:layout_height="29dp"
+        android:layout_marginStart="68dp"
+        android:layout_marginLeft="68dp"
+        android:layout_marginTop="25dp"
+        android:checked="true"
+        android:showText="true"
+        android:text="Today   "
+        android:textOff="Today"
+        android:textOn="Tomorrow"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
     <TextView
         android:id="@+id/lbltomorrow"
         android:layout_width="70dp"
-        android:layout_height="27dp"
-        android:layout_marginEnd="120dp"
-        android:layout_marginRight="120dp"
+        android:layout_height="29dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="28dp"
         android:text="Tomorrow"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/rcv"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/swtoday"
-        app:layout_constraintTop_toBottomOf="@+id/swstatus" />
+        app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcv"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="405dp"
+        android:layout_height="559dp"
         android:layout_marginStart="1dp"
         android:layout_marginLeft="1dp"
         android:layout_marginEnd="1dp"
         android:layout_marginRight="1dp"
-        android:layout_marginBottom="1dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lbltomorrow" />
+        app:layout_constraintTop_toBottomOf="@+id/swtoday"
+        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
