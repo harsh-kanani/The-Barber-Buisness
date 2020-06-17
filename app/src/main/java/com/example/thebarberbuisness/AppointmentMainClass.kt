@@ -84,8 +84,11 @@ class AppointmentMainClass(var ctx:Activity,var arlst:ArrayList<AppointmentData>
 
         fun history(status:String){
             var i=0
-            var myref1 = myRef2.child(unm). child(arlst[position].date).child(arlst[position].time).child("bookfor")
-            myref1.addListenerForSingleValueEvent(object : ValueEventListener {
+
+
+            var ref2 = database.getReference("userdata").child(arlst[position].userid).child("history").child(arlst[position].uniqid).child("staus")
+            ref2.setValue(status)
+            /*myref1.addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
                     // This method is called once with the initial value and again
                     // whenever data at this location is updated.
@@ -105,10 +108,11 @@ class AppointmentMainClass(var ctx:Activity,var arlst:ArrayList<AppointmentData>
                     // Failed to read value
                     //Log.w(TAG, "Failed to read value.", error.toException())
                 }
-            })
+            })*/
             var history =HistoryData(arlst[position].custunm,arlst[position].date,arlst[position].time,status)
-            myRef.child(arlst[position].custunm).child("History").child(unm).child(arlst[position].date).child(arlst[position].time).setValue(history)
-            myRef2.child(unm).child(arlst[position].date).child(arlst[position].time).removeValue()
+            //myRef.child(arlst[position].custunm).child("History").child(unm).child(arlst[position].date).child(arlst[position].time).setValue(history)
+            database.getReference("History").child(unm).child(arlst[position].custunm).child(arlst[position].date).child(arlst[position].time).setValue(history)
+            database.getReference("appinment").child(unm).child(arlst[position].date).child(arlst[position].time).removeValue()
         }
         holder.com.setOnClickListener {
             //var arl:ArrayList<CategoryData> = arrayListOf<CategoryData>()

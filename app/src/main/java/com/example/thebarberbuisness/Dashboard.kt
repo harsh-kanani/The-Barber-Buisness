@@ -55,9 +55,9 @@ class Dashboard : AppCompatActivity() {
                 if(value.toString().equals("Open")){
                     swstatus.isChecked = true
                 }
-                else
+                else {
                     swstatus.isChecked = false
-
+                }
                 //Log.d(FragmentActivity.TAG, "Value is: $value")
             }
 
@@ -84,6 +84,7 @@ class Dashboard : AppCompatActivity() {
 
 
         }
+
 
         val database1 = FirebaseDatabase.getInstance()
         val myref = database1.getReference("appinment")
@@ -115,7 +116,10 @@ class Dashboard : AppCompatActivity() {
                         }
 
                     }
-                    arlst.removeAt(arlst.size-1)
+                    if(arlst.size>0){
+                        arlst.removeAt(arlst.size-1)
+                    }
+
                     var ad = AppointmentMainClass(this@Dashboard,arlst,unm.toString())
                     rcv.adapter=ad
                     rcv.layoutManager = LinearLayoutManager(this@Dashboard,LinearLayoutManager.VERTICAL,false)
@@ -132,6 +136,7 @@ class Dashboard : AppCompatActivity() {
 
         }
         f(formatted.toString())
+
         swtoday.setOnCheckedChangeListener { buttonView, isChecked ->
 
 
