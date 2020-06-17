@@ -55,6 +55,9 @@ class Dashboard : AppCompatActivity() {
                 if(value.toString().equals("Open")){
                     swstatus.isChecked = true
                 }
+                else
+                    swstatus.isChecked = false
+
                 //Log.d(FragmentActivity.TAG, "Value is: $value")
             }
 
