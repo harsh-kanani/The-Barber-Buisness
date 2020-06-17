@@ -115,6 +115,7 @@ class Dashboard : AppCompatActivity() {
                         }
 
                     }
+                    arlst.removeAt(arlst.size-1)
                     var ad = AppointmentMainClass(this@Dashboard,arlst,unm.toString())
                     rcv.adapter=ad
                     rcv.layoutManager = LinearLayoutManager(this@Dashboard,LinearLayoutManager.VERTICAL,false)
