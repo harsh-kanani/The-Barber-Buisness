@@ -75,8 +75,8 @@ class otherInfo : AppCompatActivity() {
         btnsave.setOnClickListener {
             var imgurl=intent.getStringExtra("imgurl")
 
-                var shop=ShopData(uname,email,mobile,txtshopnm.text.toString(),txtct.text.toString(),password,sptp.selectedItem.toString(),txtoname.text.toString(),"Close",lbloptime.text.toString(),txtaddress.text.toString(),lblcltime.text.toString(),imgurl)
-                myRef.child(uname).setValue(shop).addOnCompleteListener {
+                var shop=ShopData(unm.toString(),email,mobile,txtshopnm.text.toString(),txtct.text.toString(),password,sptp.selectedItem.toString(),txtoname.text.toString(),"Close",lbloptime.text.toString(),txtaddress.text.toString(),lblcltime.text.toString(),imgurl)
+                myRef.child(unm.toString()).setValue(shop).addOnCompleteListener {
                     Toast.makeText(this@otherInfo,"Successfully Save",Toast.LENGTH_LONG).show()
                     startActivity(Intent(this@otherInfo,Login::class.java))
                     finish()

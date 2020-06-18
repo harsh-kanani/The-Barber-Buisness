@@ -9,10 +9,13 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.provider.SyncStateContract
 import android.view.View
+import android.widget.RadioButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.common.internal.Constants
 import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
@@ -55,10 +58,13 @@ class Registration : AppCompatActivity() {
         }
     }
 
+    private var mAuth: FirebaseAuth? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registration)
+
+        mAuth = FirebaseAuth.getInstance();
 
         lbllogin.setOnClickListener {
             startActivity(Intent(this@Registration,Login::class.java))
@@ -78,24 +84,36 @@ class Registration : AppCompatActivity() {
 
         btnreg.setOnClickListener {
             uploadImage()
-            var shopData=ShopData(txtusernm.text.toString(),txtmail.text.toString(),txtmno.text.toString()," "," ",txtpass.text.toString()," "," ","Open"," "," ","")
-            val database = FirebaseDatabase.getInstance()
-            val myRef = database.getReference("Shop")
-            username=txtusernm.text.toString()
-                myRef.child("${txtusernm.text.toString()}").setValue(shopData)
-                    .addOnCompleteListener {
-                        Toast.makeText(
-                            this@Registration,
-                            "Successfully Register",
-                            Toast.LENGTH_LONG
-                        ).show()
-                        var sp = getSharedPreferences("MySp", Activity.MODE_PRIVATE)
-                        var edt = sp.edit()
-                        edt.putString("unm", "${txtusernm.text.toString()}")
-                        edt.apply()
-                        edt.commit()
+            var userfirebase: FirebaseUser?=null
+            mAuth!!.createUserWithEmailAndPassword(txtmail.text.toString(), txtpass.text.toString())
+                .addOnCompleteListener(this) { task ->
+                    val user = mAuth!!.currentUser
+                    if (user != null) {
+                        userfirebase= user
+                        var shopData=ShopData(txtusernm.text.toString(),txtmail.text.toString(),txtmno.text.toString()," "," ",txtpass.text.toString()," "," ","Open"," "," ","")
+                        val database = FirebaseDatabase.getInstance()
+                        val myRef = database.getReference("Shop")
+                        username=user.uid.toString()
+                        myRef.child("${username}").setValue(shopData)
+                            .addOnCompleteListener {
+                                Toast.makeText(
+                                    this@Registration,
+                                    "Successfully Register",
+                                    Toast.LENGTH_LONG
+                                ).show()
+                                var sp = getSharedPreferences("MySp", Activity.MODE_PRIVATE)
+                                var edt = sp.edit()
+                                edt.putString("unm", "${username.toString()}")
+                                edt.apply()
+                                edt.commit()
 
+                            }
                     }
+                }
+
+
+            //unnesaary
+
         }
     }
 
