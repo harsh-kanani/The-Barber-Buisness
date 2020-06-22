@@ -19,6 +19,7 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_dashboard.*
 import kotlinx.android.synthetic.main.activity_view_category.*
@@ -36,13 +37,17 @@ import kotlin.collections.ArrayList
 class Dashboard : AppCompatActivity() {
     val database = FirebaseDatabase.getInstance()
     val myRef = database.getReference("Shop")
+    private var mAuth: FirebaseAuth? = null
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_dashboard)
 
         var sp = getSharedPreferences("MySp",Activity.MODE_PRIVATE)
-        var unm = sp.getString("unm","null")
+
+        mAuth=FirebaseAuth.getInstance()
+        val user = mAuth!!.currentUser
+        var unm = user!!.uid
 
         val database = FirebaseDatabase.getInstance()
         val myRef = database.getReference("Shop")

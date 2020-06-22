@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -18,13 +19,15 @@ import kotlinx.android.synthetic.main.activity_add_category.*
 
 
 class AddCategory : AppCompatActivity() {
+    private var mAuth: FirebaseAuth? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_category)
 
-        var sp=getSharedPreferences("MySp",Activity.MODE_PRIVATE)
-        var unm=sp.getString("unm","null")
+        mAuth= FirebaseAuth.getInstance()
+        val user = mAuth!!.currentUser
+        var unm = user!!.uid
 
         val database = FirebaseDatabase.getInstance()
         val myRef = database.getReference("Category")

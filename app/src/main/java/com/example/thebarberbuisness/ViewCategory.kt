@@ -4,6 +4,7 @@ import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -11,13 +12,16 @@ import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_view_category.*
 
 class ViewCategory : AppCompatActivity() {
+    private var mAuth: FirebaseAuth? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_view_category)
 
-        var sp=getSharedPreferences("MySp", Activity.MODE_PRIVATE)
-        var unm=sp.getString("unm","null")
+        mAuth= FirebaseAuth.getInstance()
+        val user = mAuth!!.currentUser
+        var unm = user!!.uid
+
 
         var arlst:ArrayList<CategoryData> = arrayListOf<CategoryData>()
         val database = FirebaseDatabase.getInstance()
