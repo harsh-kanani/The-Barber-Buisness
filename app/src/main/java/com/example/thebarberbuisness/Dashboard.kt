@@ -190,6 +190,7 @@ class Dashboard : AppCompatActivity() {
                 edt.putString("unm",null)
                 edt.apply()
                 edt.commit()
+                mAuth!!.signOut()
                 startActivity(Intent(this@Dashboard,Login::class.java))
 
                 return true
